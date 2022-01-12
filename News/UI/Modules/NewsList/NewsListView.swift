@@ -34,6 +34,7 @@ struct NewsListView: View {
                 ForEach(model.newsListRowViewModels) { viewModel in
                     NewsListRowView(model: viewModel)
                         .onAppear { model.newsWillAppear(model: viewModel) }
+                        .onTapGesture { model.openNewsView(newsURL: viewModel.newsURL) }
                 }
 
                 if model.newsProviderRequestState == .loading {
@@ -73,6 +74,18 @@ struct NewsListView: View {
         }
         .globalFrame { scrollViewFrame = $0 }
         .onAppear(perform: model.refreshNews)
+        .sheet(
+            isPresented: .constant(model.selectedNewsURL != nil),
+            onDismiss: model.onNewsViewDismiss,
+            content: {
+                if let url = model.selectedNewsURL {
+                    NewsWebView(model: .init(newsURL: url))
+
+                } else {
+                    EmptyView()
+                }
+            }
+        )
     }
 
     @ViewBuilder private func loadMoreButton(action: @escaping () -> Void) -> some View {

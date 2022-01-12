@@ -47,10 +47,13 @@ struct NewsListRowView: View {
                     Text(model.title)
                         .lineLimit(3)
                         .font(Fonts.subtitle)
-                    Text(model.author)
-                        .lineLimit(1)
-                        .font(Fonts.body)
-                        .foregroundColor(.secondary)
+                    
+                    Button(action: model.openAuthorPage) {
+                        Text(model.author)
+                            .lineLimit(1)
+                            .font(Fonts.body)
+                            .foregroundColor(.secondary)
+                    }
                 }
                 .padding(16)
                 
@@ -77,6 +80,18 @@ struct NewsListRowView: View {
                 items: model.activityItems,
                 onComplete: { _,_,_,_  in model.onActivityComplete() }
             )
+        )
+        .sheet(
+            isPresented: .constant(model.authorPageURL != nil),
+            onDismiss: model.onAuthorPageDismiss,
+            content: {
+                if let url = model.authorPageURL {
+                    NewsWebView(model: .init(newsURL: url))
+
+                } else {
+                    EmptyView()
+                }
+            }
         )
     }
     

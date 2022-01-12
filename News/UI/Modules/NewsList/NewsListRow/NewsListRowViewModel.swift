@@ -81,4 +81,14 @@ final class NewsListRowViewModel: Identifiable, ObservableObject {
     func onActivityComplete() {
         activityItems = []
     }
+    
+    func openAuthorPage() {
+        if let url = URL(string: authorURL) {
+            authorPageURL = url
+        }
+    }
+    
+    func onAuthorPageDismiss() {
+        authorPageURL = nil
+    }
 }

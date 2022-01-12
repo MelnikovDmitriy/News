@@ -18,6 +18,7 @@ final class NewsListViewModel: ObservableObject {
     
     @Published private(set) var newsProviderRequestState = NewsProviderRequestState.inactive
     @Published private(set) var newsListRowViewModels = [NewsListRowViewModel]()
+    @Published private(set) var selectedNewsURL: URL?
     
     private func addNewsModels(news: [NewsDTO]) {
         let models = self.newslistRowViewModelFactory.map(news)
@@ -132,6 +133,17 @@ extension NewsListViewModel {
         withAnimation {
             newsProviderRequestState = .inactive
         }
+    }
+}
+
+// MARK: - News View
+extension NewsListViewModel {
+    func openNewsView(newsURL: String) {
+        selectedNewsURL = URL(string: newsURL)
+    }
+
+    func onNewsViewDismiss() {
+        selectedNewsURL = nil
     }
 }
 
