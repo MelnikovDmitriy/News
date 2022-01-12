@@ -13,6 +13,9 @@ final class NewsListViewModel: ObservableObject {
     private let newslistRowViewModelFactory = NewsListRowViewModelFactory()
     private let errorViewModelFactory = ErrorModelFactory()
     
+    let refreshAnimationViewModel = RefreshAnimationViewModel()
+    let loadingMoreNewsAnimationViewModel = LoadingMoreNewsAnimationModel()
+    
     @Published private(set) var newsProviderRequestState = NewsProviderRequestState.inactive
     @Published private(set) var newsListRowViewModels = [NewsListRowViewModel]()
     
@@ -50,12 +53,15 @@ extension NewsListViewModel {
     func refreshNews() {
         guard newsProviderRequestState == .inactive else { return }
 
+        refreshAnimationViewModel.startAnimation()
         newsProviderRequestState = .refreshing
         
         newsProvider.refreshNews { [weak self] result in
             guard let self = self else { return }
 
-            DispatchQueue.main.async {                
+            DispatchQueue.main.async {
+                self.refreshAnimationViewModel.stopAnimation()
+                
                 switch result {
 
                 case .failure(let error):
@@ -81,12 +87,15 @@ extension NewsListViewModel {
         guard newsProviderRequestState == .inactive,
               !newsListRowViewModels.isEmpty else { return }
         
+        loadingMoreNewsAnimationViewModel.startAnimation()
         newsProviderRequestState = .loading
                 
         newsProvider.loadMoreNews { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.sync {
+                self.loadingMoreNewsAnimationViewModel.stopAnimation()
+                
                 switch result {
                     
                 case .failure(let error):
@@ -123,6 +132,17 @@ extension NewsListViewModel {
         withAnimation {
             newsProviderRequestState = .inactive
         }
+    }
+}
+
+// MARK: - Refresher
+extension NewsListViewModel {
+    var refresherHeight: CGFloat {
+        refreshAnimationViewModel.refresherHeight
+    }
+    
+    func updateRefresherImageSize(offset: CGFloat) {
+        refreshAnimationViewModel.updateImageSize(offset: offset)
     }
 }
 
