@@ -1,6 +1,6 @@
 //
 //  NewsListRowViewModelFactory.swift
-//  BabushkinaOdnushka
+//  News
 //
 //  Created by Дмитрий Мельников on 04.01.2022.
 //

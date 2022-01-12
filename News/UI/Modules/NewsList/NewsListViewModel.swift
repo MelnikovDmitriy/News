@@ -11,6 +11,7 @@ final class NewsListViewModel: ObservableObject {
     
     private let newsProvider = GamesMailRuNewsProvider()
     private let newslistRowViewModelFactory = NewsListRowViewModelFactory()
+    private let errorViewModelFactory = ErrorModelFactory()
     
     @Published private(set) var newsProviderRequestState = NewsProviderRequestState.inactive
     @Published private(set) var newsListRowViewModels = [NewsListRowViewModel]()
@@ -24,11 +25,26 @@ final class NewsListViewModel: ObservableObject {
 
 // MARK: - News Provider
 extension NewsListViewModel {
-    enum NewsProviderRequestState {
+    enum NewsProviderRequestState: Equatable {
         case loading
         case refreshing
-        case error
+        case error(ErrorModel)
         case inactive
+        
+        static func == (lhs: NewsListViewModel.NewsProviderRequestState, rhs: NewsListViewModel.NewsProviderRequestState) -> Bool {
+            switch (lhs, rhs) {
+            case (loading, loading):
+                return true
+            case (refreshing, refreshing):
+                return true
+            case (error, error):
+                return true
+            case (inactive, inactive):
+                return true
+            default:
+                return false
+            }
+        }
     }
     
     func refreshNews() {
@@ -42,8 +58,8 @@ extension NewsListViewModel {
             DispatchQueue.main.async {                
                 switch result {
 
-                case .failure:
-                    ()
+                case .failure(let error):
+                    self.showError(error, action: self.refreshNews)
 
                 case .success(let news):
                     if let lastNewsDate = self.newsListRowViewModels.first?.date {
@@ -54,9 +70,9 @@ extension NewsListViewModel {
                     } else if self.newsListRowViewModels.isEmpty {
                         self.addNewsModels(news: news)
                     }
+                    
+                    self.setInactiveNewsAPIRequestState()
                 }
-                
-                self.setInactiveNewsAPIRequestState()
             }
         }
     }
@@ -73,14 +89,13 @@ extension NewsListViewModel {
             DispatchQueue.main.sync {
                 switch result {
                     
-                case .failure:
-                    return
+                case .failure(let error):
+                    self.showError(error, action: self.loadMoreNews)
                     
                 case .success(let news):
                     self.addNewsModels(news: news)
+                    self.setInactiveNewsAPIRequestState()
                 }
-                
-                self.setInactiveNewsAPIRequestState()
             }
         }
     }
@@ -93,6 +108,14 @@ extension NewsListViewModel {
         if requestMoreNewsModelIndex > 0,
            model.id == newsListRowViewModels[requestMoreNewsModelIndex].id {
             loadMoreNews()
+        }
+    }
+    
+    private func showError(_ error: NewsProviderError, action: @escaping () -> Void) {
+        if let model = errorViewModelFactory.map(error, action: action, cancel: setInactiveNewsAPIRequestState) {
+            withAnimation {
+                newsProviderRequestState = .error(model)
+            }
         }
     }
     

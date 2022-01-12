@@ -24,6 +24,10 @@
 		0A4BE29C278F16B500DEABFB /* NewsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE29A278F16B500DEABFB /* NewsListViewModel.swift */; };
 		0A4BE29D278F16B500DEABFB /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE29B278F16B500DEABFB /* NewsListView.swift */; };
 		0A4BE2A0278F17F300DEABFB /* NewsListRowViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE29F278F17F300DEABFB /* NewsListRowViewModelFactory.swift */; };
+		0A4BE2A4278F1DDA00DEABFB /* ErrorModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE2A2278F1DDA00DEABFB /* ErrorModelFactory.swift */; };
+		0A4BE2A5278F1DDA00DEABFB /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE2A3278F1DDA00DEABFB /* ErrorModel.swift */; };
+		0A4BE2AC278F1ED700DEABFB /* ErrorBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE2A9278F1ED700DEABFB /* ErrorBottomView.swift */; };
+		0A4BE2AD278F1ED700DEABFB /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE2AB278F1ED700DEABFB /* MessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,10 @@
 		0A4BE29A278F16B500DEABFB /* NewsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewModel.swift; sourceTree = "<group>"; };
 		0A4BE29B278F16B500DEABFB /* NewsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListView.swift; sourceTree = "<group>"; };
 		0A4BE29F278F17F300DEABFB /* NewsListRowViewModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListRowViewModelFactory.swift; sourceTree = "<group>"; };
+		0A4BE2A2278F1DDA00DEABFB /* ErrorModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorModelFactory.swift; sourceTree = "<group>"; };
+		0A4BE2A3278F1DDA00DEABFB /* ErrorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		0A4BE2A9278F1ED700DEABFB /* ErrorBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorBottomView.swift; sourceTree = "<group>"; };
+		0A4BE2AB278F1ED700DEABFB /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +95,7 @@
 		0A4BE272278EF25100DEABFB /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0A4BE2A6278F1EC500DEABFB /* CommonComponents */,
 				0A4BE29E278F16E800DEABFB /* Modules */,
 				0A4BE27F278EF34800DEABFB /* Assets */,
 				0A4BE27A278EF30F00DEABFB /* Styles */,
@@ -133,6 +142,7 @@
 		0A4BE288278F153100DEABFB /* NewsProvider */ = {
 			isa = PBXGroup;
 			children = (
+				0A4BE2A1278F1DDA00DEABFB /* Errors */,
 				0A4BE28D278F153100DEABFB /* Common */,
 				0A4BE289278F153100DEABFB /* GamesMailRu */,
 			);
@@ -176,6 +186,48 @@
 				0A4BE299278F163E00DEABFB /* NewsList */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		0A4BE2A1278F1DDA00DEABFB /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				0A4BE2A3278F1DDA00DEABFB /* ErrorModel.swift */,
+				0A4BE2A2278F1DDA00DEABFB /* ErrorModelFactory.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		0A4BE2A6278F1EC500DEABFB /* CommonComponents */ = {
+			isa = PBXGroup;
+			children = (
+				0A4BE2A7278F1ED700DEABFB /* Errors */,
+				0A4BE2AA278F1ED700DEABFB /* Message */,
+			);
+			path = CommonComponents;
+			sourceTree = "<group>";
+		};
+		0A4BE2A7278F1ED700DEABFB /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				0A4BE2A8278F1ED700DEABFB /* BottomError */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		0A4BE2A8278F1ED700DEABFB /* BottomError */ = {
+			isa = PBXGroup;
+			children = (
+				0A4BE2A9278F1ED700DEABFB /* ErrorBottomView.swift */,
+			);
+			path = BottomError;
+			sourceTree = "<group>";
+		};
+		0A4BE2AA278F1ED700DEABFB /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				0A4BE2AB278F1ED700DEABFB /* MessageView.swift */,
+			);
+			path = Message;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,13 +303,17 @@
 				0A4BE29C278F16B500DEABFB /* NewsListViewModel.swift in Sources */,
 				0A4BE292278F153100DEABFB /* GamesMailRuNewsDTO.swift in Sources */,
 				0A4BE2A0278F17F300DEABFB /* NewsListRowViewModelFactory.swift in Sources */,
+				0A4BE2AD278F1ED700DEABFB /* MessageView.swift in Sources */,
 				0A4BE27E278EF32C00DEABFB /* Fonts.swift in Sources */,
 				0A4BE297278F153100DEABFB /* NewsImageLoader.swift in Sources */,
+				0A4BE2A5278F1DDA00DEABFB /* ErrorModel.swift in Sources */,
 				0A4BE293278F153100DEABFB /* GamesMailRuNewsProvider+Response.swift in Sources */,
 				0A4BE275278EF27400DEABFB /* NewsListRowView.swift in Sources */,
+				0A4BE2A4278F1DDA00DEABFB /* ErrorModelFactory.swift in Sources */,
 				0A4BE29D278F16B500DEABFB /* NewsListView.swift in Sources */,
 				0A4BE27D278EF32C00DEABFB /* Colors.swift in Sources */,
 				0A4BE296278F153100DEABFB /* NewsDTO.swift in Sources */,
+				0A4BE2AC278F1ED700DEABFB /* ErrorBottomView.swift in Sources */,
 				0A4BE295278F153100DEABFB /* NewsProviderError.swift in Sources */,
 				0A4BE279278EF2CD00DEABFB /* NewsListRowMenuView.swift in Sources */,
 				0A4BE277278EF27F00DEABFB /* NewsListRowViewModel.swift in Sources */,
