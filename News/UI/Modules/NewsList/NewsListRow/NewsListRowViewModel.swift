@@ -16,6 +16,8 @@ final class NewsListRowViewModel: Identifiable, ObservableObject {
     let author: String
     let authorURL: String
     let date: Date
+    
+    private let imageLoader = NewsImageLoader()
         
     @Published private(set) var image: UIImage?
     @Published private(set) var isImageLoadingFailed = false
@@ -39,6 +41,27 @@ final class NewsListRowViewModel: Identifiable, ObservableObject {
         self.author = author
         self.authorURL = authorURL
         self.date = date
+    }
+    
+    func loadImage() {
+        guard image == nil else { return }
+        
+        imageLoader.loadImage(imageURL: imageURL) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                
+                case .success(let image):
+                    self?.image = image
+                
+                case .failure:
+                    self?.isImageLoadingFailed = true
+                }
+            }
+        }
+    }
+    
+    func removeImage() {
+        image = nil
     }
 
     func showMenu() {

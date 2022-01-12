@@ -21,6 +21,9 @@
 		0A4BE296278F153100DEABFB /* NewsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE28F278F153100DEABFB /* NewsDTO.swift */; };
 		0A4BE297278F153100DEABFB /* NewsImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE290278F153100DEABFB /* NewsImageLoader.swift */; };
 		0A4BE298278F153100DEABFB /* NewsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE291278F153100DEABFB /* NewsProvider.swift */; };
+		0A4BE29C278F16B500DEABFB /* NewsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE29A278F16B500DEABFB /* NewsListViewModel.swift */; };
+		0A4BE29D278F16B500DEABFB /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE29B278F16B500DEABFB /* NewsListView.swift */; };
+		0A4BE2A0278F17F300DEABFB /* NewsListRowViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE29F278F17F300DEABFB /* NewsListRowViewModelFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,9 @@
 		0A4BE28F278F153100DEABFB /* NewsDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDTO.swift; sourceTree = "<group>"; };
 		0A4BE290278F153100DEABFB /* NewsImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsImageLoader.swift; sourceTree = "<group>"; };
 		0A4BE291278F153100DEABFB /* NewsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsProvider.swift; sourceTree = "<group>"; };
+		0A4BE29A278F16B500DEABFB /* NewsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewModel.swift; sourceTree = "<group>"; };
+		0A4BE29B278F16B500DEABFB /* NewsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListView.swift; sourceTree = "<group>"; };
+		0A4BE29F278F17F300DEABFB /* NewsListRowViewModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListRowViewModelFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +87,8 @@
 		0A4BE272278EF25100DEABFB /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0A4BE29E278F16E800DEABFB /* Modules */,
 				0A4BE27F278EF34800DEABFB /* Assets */,
-				0A4BE273278EF25E00DEABFB /* NewsListRow */,
 				0A4BE27A278EF30F00DEABFB /* Styles */,
 			);
 			path = UI;
@@ -94,6 +100,7 @@
 				0A4BE278278EF2CD00DEABFB /* NewsListRowMenuView.swift */,
 				0A4BE274278EF27400DEABFB /* NewsListRowView.swift */,
 				0A4BE276278EF27F00DEABFB /* NewsListRowViewModel.swift */,
+				0A4BE29F278F17F300DEABFB /* NewsListRowViewModelFactory.swift */,
 			);
 			path = NewsListRow;
 			sourceTree = "<group>";
@@ -151,6 +158,24 @@
 				0A4BE291278F153100DEABFB /* NewsProvider.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		0A4BE299278F163E00DEABFB /* NewsList */ = {
+			isa = PBXGroup;
+			children = (
+				0A4BE29B278F16B500DEABFB /* NewsListView.swift */,
+				0A4BE29A278F16B500DEABFB /* NewsListViewModel.swift */,
+				0A4BE273278EF25E00DEABFB /* NewsListRow */,
+			);
+			path = NewsList;
+			sourceTree = "<group>";
+		};
+		0A4BE29E278F16E800DEABFB /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				0A4BE299278F163E00DEABFB /* NewsList */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,11 +248,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A4BE294278F153100DEABFB /* GamesMailRuNewsProvider.swift in Sources */,
+				0A4BE29C278F16B500DEABFB /* NewsListViewModel.swift in Sources */,
 				0A4BE292278F153100DEABFB /* GamesMailRuNewsDTO.swift in Sources */,
+				0A4BE2A0278F17F300DEABFB /* NewsListRowViewModelFactory.swift in Sources */,
 				0A4BE27E278EF32C00DEABFB /* Fonts.swift in Sources */,
 				0A4BE297278F153100DEABFB /* NewsImageLoader.swift in Sources */,
 				0A4BE293278F153100DEABFB /* GamesMailRuNewsProvider+Response.swift in Sources */,
 				0A4BE275278EF27400DEABFB /* NewsListRowView.swift in Sources */,
+				0A4BE29D278F16B500DEABFB /* NewsListView.swift in Sources */,
 				0A4BE27D278EF32C00DEABFB /* Colors.swift in Sources */,
 				0A4BE296278F153100DEABFB /* NewsDTO.swift in Sources */,
 				0A4BE295278F153100DEABFB /* NewsProviderError.swift in Sources */,

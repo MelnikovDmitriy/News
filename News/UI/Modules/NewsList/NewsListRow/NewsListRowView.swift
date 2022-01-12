@@ -64,6 +64,7 @@ struct NewsListRowView: View {
         .padding(.vertical, 8)
         .padding(.horizontal, 16)
         .frame(width: UIScreen.main.bounds.width > 400 ? 400 : nil)
+        .onDisappear(perform: model.removeImage)
         .gesture(
             DragGesture(minimumDistance: 100)
                 .onEnded {
