@@ -71,6 +71,13 @@ struct NewsListRowView: View {
                     updateMenuState(translationWidth: $0.translation.width)
                 }
         )
+        .background(
+            ActivityView(
+                isPresented: .constant(!model.activityItems.isEmpty),
+                items: model.activityItems,
+                onComplete: { _,_,_,_  in model.onActivityComplete() }
+            )
+        )
     }
     
     private func updateMenuState(translationWidth: CGFloat) {

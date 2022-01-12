@@ -71,4 +71,14 @@ final class NewsListRowViewModel: Identifiable, ObservableObject {
     func hideMenu() {
         isMenuPresented = false
     }
+
+    func showActivity() {
+        if let url = URL(string: newsURL) {
+            activityItems = [url]
+        }
+    }
+
+    func onActivityComplete() {
+        activityItems = []
+    }
 }

@@ -13,7 +13,7 @@ struct NewsListRowMenuView: View {
 
     var body: some View {
         VStack(spacing: 24) {
-            Button(action: {}) {
+            Button(action: model.showActivity) {
                 Image(systemName: "square.and.arrow.up")
             }
 
