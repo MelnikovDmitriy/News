@@ -7,35 +7,32 @@
 
 import SwiftUI
 
-fileprivate struct ScrollViewContentOffsetObserverViewModifier: ViewModifier {
-    
+struct ScrollViewContentOffsetObserverViewModifier: ViewModifier {
     let coordinateSpaceName: String
-    let offsetDidChange: (_ offset: CGFloat, _ contentHeight: CGFloat) -> Void
-        
+    let offsetDidChange: (_ offset: CGFloat) -> Void
+
     func body(content: Content) -> some View {
         content
             .background(
                 GeometryReader { geometryProxy in
-                    handler(
-                        offset: geometryProxy.frame(in: .named(coordinateSpaceName)).origin.y,
-                        contentHeight: geometryProxy.size.height
-                    )
+                    let offset = geometryProxy.frame(in: .named(coordinateSpaceName)).origin.y
+                    handler(offset: offset)
                 }
             )
     }
     
-    private func handler(offset: CGFloat, contentHeight: CGFloat) -> Color {
+    private func handler(offset: CGFloat) -> AnyView? {
         DispatchQueue.main.async {
-            offsetDidChange(offset, contentHeight)
+            offsetDidChange(offset)
         }
         
-        return .clear
+        return nil
     }
 }
 
 // MARK: - View Extension
 extension View {
-    func scrollViewContentOffsetObserver(coordinateSpaceName: String, offsetDidChange: @escaping (_ offset: CGFloat, _ contentHeight: CGFloat) -> Void) -> some View {
+    func scrollViewContentOffsetObserver(coordinateSpaceName: String, offsetDidChange: @escaping (_ offset: CGFloat) -> Void) -> some View {
         self.modifier(
             ScrollViewContentOffsetObserverViewModifier(
                 coordinateSpaceName: coordinateSpaceName,

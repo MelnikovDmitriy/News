@@ -18,9 +18,8 @@ final class NewsListRowViewModel: Identifiable, ObservableObject {
     let date: Date
     
     private let imageLoader = NewsImageLoader()
-        
+
     @Published private(set) var image: UIImage?
-    @Published private(set) var isImageLoadingFailed = false
     @Published private(set) var isMenuPresented = false
     @Published private(set) var activityItems = [URL]()
     @Published private(set) var authorPageURL: URL?
@@ -48,13 +47,8 @@ final class NewsListRowViewModel: Identifiable, ObservableObject {
         
         imageLoader.loadImage(imageURL: imageURL) { [weak self] result in
             DispatchQueue.main.async {
-                switch result {
-                
-                case .success(let image):
+                if case .success(let image) = result {
                     self?.image = image
-                
-                case .failure:
-                    self?.isImageLoadingFailed = true
                 }
             }
         }

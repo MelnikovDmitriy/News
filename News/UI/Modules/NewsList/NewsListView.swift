@@ -8,25 +8,12 @@
 import SwiftUI
 
 struct NewsListView: View {
-    
     @ObservedObject var model: NewsListViewModel
     
     @State private var scrollingDisabled = false
     @State private var scrollViewFrame = CGRect.zero
     
     private let coordinateSpaceName = "NewsScrollViewCoordinateSpaceName"
-
-    private var emptyNewsListMessageView: some View {
-        MessageView(
-            title: "Новостей нет",
-            subtitle: "Очень странные дела. Похоже кто-то снес базу на сервере"
-        )
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .overlay(
-            loadMoreButton(action: model.refreshNews)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-        )
-    }
 
     private var newsScrollView: some View {
         ScrollView(showsIndicators: false) {
@@ -66,13 +53,19 @@ struct NewsListView: View {
             if case .error(let errorModel) = model.newsProviderRequestState {
                 ErrorBottomView(model: errorModel)
                     .zIndex(1)
-
-            } else if case .inactive = model.newsProviderRequestState,
-                 model.newsListRowViewModels.isEmpty {
-                emptyNewsListMessageView
+                    .transition(.move(edge: .bottom))
+            }
+            
+            if let error = model.emptyNewsStoreError {
+                MessageView(title: error.title, subtitle: error.subtitle)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .overlay(
+                        loadMoreButton(action: error.action)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                    )
             }
         }
-        .globalFrame { scrollViewFrame = $0 }
+        .animation(.spring(), value: model.newsProviderRequestState)
         .onAppear(perform: model.refreshNews)
         .sheet(
             isPresented: .constant(model.selectedNewsURL != nil),
@@ -101,7 +94,7 @@ struct NewsListView: View {
         .padding(.bottom)
     }
     
-    private func scrollViewContentOffsetDidChange(offset: CGFloat, contentHeight: CGFloat) {
+    private func scrollViewContentOffsetDidChange(offset: CGFloat) {
         if offset > model.refresherHeight {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
@@ -116,7 +109,7 @@ struct NewsListView: View {
     
     private func fixScrollViewTopEdge() {
         scrollingDisabled = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.async {
             scrollingDisabled = false
         }
     }

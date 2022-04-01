@@ -19,7 +19,7 @@ struct ErrorModelFactory {
         )
     }
 
-    func map(_ error: NewsProviderError, action: @escaping () -> Void, cancel: @escaping () -> Void) -> ErrorModel? {
+    func map(_ error: NewsProviderError, action: @escaping () -> Void, cancel: (() -> Void)? = nil) -> ErrorModel? {
         switch error {
         
         case .invalidURL:
@@ -45,6 +45,15 @@ struct ErrorModelFactory {
         
         case .responseDecodingFail:
             return nil
+            
+        case .emptyResponse:
+            return  .init(
+                title: "Новостей нет",
+                subtitle: "Очень странные дела. Похоже кто-то снес базу на сервере",
+                action: action,
+                actionTitle: "Попробовать еще раз",
+                cancel: cancel
+            )
         }
     }
 }

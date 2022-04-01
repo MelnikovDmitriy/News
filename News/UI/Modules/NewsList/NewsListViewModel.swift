@@ -5,10 +5,11 @@
 //  Created by Дмитрий Мельников on 29.12.2021.
 //
 
+import struct CoreGraphics.CGFloat
+import Foundation
 import SwiftUI
 
 final class NewsListViewModel: ObservableObject {
-    
     private let newsProvider = GamesMailRuNewsProvider()
     private let newslistRowViewModelFactory = NewsListRowViewModelFactory()
     private let errorViewModelFactory = ErrorModelFactory()
@@ -19,6 +20,7 @@ final class NewsListViewModel: ObservableObject {
     @Published private(set) var newsProviderRequestState = NewsProviderRequestState.inactive
     @Published private(set) var newsListRowViewModels = [NewsListRowViewModel]()
     @Published private(set) var selectedNewsURL: URL?
+    @Published private(set) var emptyNewsStoreError: ErrorModel?
     
     private func addNewsModels(news: [NewsDTO]) {
         let models = self.newslistRowViewModelFactory.map(news)
@@ -53,20 +55,28 @@ extension NewsListViewModel {
     
     func refreshNews() {
         guard newsProviderRequestState == .inactive else { return }
-
+        
         refreshAnimationViewModel.startAnimation()
-        newsProviderRequestState = .refreshing
+        
+        var transaction = Transaction()
+        transaction.disablesAnimations = true
+        withTransaction(transaction) {
+            newsProviderRequestState = .refreshing
+        }
         
         newsProvider.refreshNews { [weak self] result in
             guard let self = self else { return }
-
+            
             DispatchQueue.main.async {
                 self.refreshAnimationViewModel.stopAnimation()
                 
                 switch result {
 
                 case .failure(let error):
-                    self.showError(error, action: self.refreshNews)
+                    self.showError(error, action: {
+                        self.newsProviderRequestState = .inactive
+                        self.refreshNews()
+                    })
 
                 case .success(let news):
                     if let lastNewsDate = self.newsListRowViewModels.first?.date {
@@ -74,10 +84,13 @@ extension NewsListViewModel {
                         models.forEach { $0.loadImage() }
                         self.newsListRowViewModels.insert(contentsOf: models, at: 0)
 
-                    } else if self.newsListRowViewModels.isEmpty {
+                    } else if self.newsListRowViewModels.isEmpty && !news.isEmpty {
                         self.addNewsModels(news: news)
-                    }
                     
+                    } else {
+                        self.emptyNewsStoreError = self.errorViewModelFactory.map(.emptyResponse, action: self.refreshNews)
+                    }
+
                     self.setInactiveNewsAPIRequestState()
                 }
             }
@@ -85,12 +98,11 @@ extension NewsListViewModel {
     }
     
     func loadMoreNews() {
-        guard newsProviderRequestState == .inactive,
-              !newsListRowViewModels.isEmpty else { return }
+        guard newsProviderRequestState == .inactive, !newsListRowViewModels.isEmpty else { return }
         
         loadingMoreNewsAnimationViewModel.startAnimation()
         newsProviderRequestState = .loading
-                
+
         newsProvider.loadMoreNews { [weak self] result in
             guard let self = self else { return }
             
@@ -98,10 +110,13 @@ extension NewsListViewModel {
                 self.loadingMoreNewsAnimationViewModel.stopAnimation()
                 
                 switch result {
-                    
+
                 case .failure(let error):
-                    self.showError(error, action: self.loadMoreNews)
-                    
+                    self.showError(error, action: {
+                        self.newsProviderRequestState = .inactive
+                        self.loadMoreNews()
+                    })
+
                 case .success(let news):
                     self.addNewsModels(news: news)
                     self.setInactiveNewsAPIRequestState()
@@ -112,9 +127,9 @@ extension NewsListViewModel {
 
     func newsWillAppear(model: NewsListRowViewModel) {
         model.loadImage()
-
+        
         let requestMoreNewsModelIndex = newsListRowViewModels.count - Config.restNewsCountForRequestMore
-
+        
         if requestMoreNewsModelIndex > 0,
            model.id == newsListRowViewModels[requestMoreNewsModelIndex].id {
             loadMoreNews()
@@ -123,16 +138,12 @@ extension NewsListViewModel {
     
     private func showError(_ error: NewsProviderError, action: @escaping () -> Void) {
         if let model = errorViewModelFactory.map(error, action: action, cancel: setInactiveNewsAPIRequestState) {
-            withAnimation {
-                newsProviderRequestState = .error(model)
-            }
+            newsProviderRequestState = .error(model)
         }
     }
     
     private func setInactiveNewsAPIRequestState() {
-        withAnimation {
-            newsProviderRequestState = .inactive
-        }
+        newsProviderRequestState = .inactive
     }
 }
 

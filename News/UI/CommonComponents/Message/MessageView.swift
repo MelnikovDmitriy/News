@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MessageView: View {
-
     let title: String
     let subtitle: String
 

@@ -8,7 +8,6 @@
 import SwiftUI
 
 final class ActivityViewControllerWrapper: UIViewController {
-
     var activityItems: [Any]
     var applicationActivities: [UIActivity]?
     var isPresented: Binding<Bool>

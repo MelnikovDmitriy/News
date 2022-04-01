@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RefreshAnimationView: View {
-    
     @ObservedObject var model: RefreshAnimationViewModel
     
     var body: some View {

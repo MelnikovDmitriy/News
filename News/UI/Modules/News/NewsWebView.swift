@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct NewsWebView: View {
-
     @StateObject var model: NewsWebViewModel
 
     var body: some View {

@@ -12,4 +12,5 @@ enum NewsProviderError: Error {
     case connectionFail
     case statusCodeIsNotOK
     case responseDecodingFail
+    case emptyResponse
 }

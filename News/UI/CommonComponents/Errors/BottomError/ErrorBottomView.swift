@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct ErrorBottomView: View {
-    
     let model: ErrorModel
     
     var body: some View {
         GeometryReader { geometryProxy in
-            ZStack(alignment: .bottom) {
-                Color.black.opacity(0.2)
-                    .zIndex(1)
+            VStack {
+                Spacer()
                 
                 VStack(spacing: 16) {
                     MessageView(title: model.title, subtitle: model.subtitle)
@@ -54,7 +52,6 @@ struct ErrorBottomView: View {
                 .background(Colors.mainBackground)
                 .cornerRadius(14)
                 .shadow(radius: 4)
-                .zIndex(2)
             }
             .edgesIgnoringSafeArea(.all)
         }

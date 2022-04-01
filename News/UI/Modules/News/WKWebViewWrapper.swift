@@ -9,7 +9,6 @@ import SwiftUI
 import WebKit
 
 struct WKWebViewWrapper: UIViewRepresentable {
-
     let url: URL
 
     @Binding var loadingState: LoadingState
@@ -47,7 +46,6 @@ extension WKWebViewWrapper {
 // MARK: - Coordinator
 extension WKWebViewWrapper {
     final class Coordinator: NSObject, WKNavigationDelegate {
-
         let loadingStateChanged: (LoadingState) -> Void
 
         init(loadingStateChanged: @escaping (LoadingState) -> Void) {

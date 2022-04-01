@@ -35,6 +35,21 @@ struct NewsListRowView: View {
                 .overlay(Colors.mainBackground.opacity(0.85))
         }
     }
+
+    @ViewBuilder private var activityView: some View {
+        let isPreseted = !model.activityItems.isEmpty
+
+        if isPreseted {
+            ActivityView(
+                isPresented: .constant(isPreseted),
+                activityItems: model.activityItems,
+                applicationActivities: nil,
+                completion: { _,_,_,_  in model.onActivityComplete() }
+            )
+        } else {
+            EmptyView()
+        }
+    }
     
     var body: some View {
         ZStack(alignment: .trailing) {
@@ -69,18 +84,12 @@ struct NewsListRowView: View {
         .frame(width: UIScreen.main.bounds.width > 400 ? 400 : nil)
         .onDisappear(perform: model.removeImage)
         .gesture(
-            DragGesture(minimumDistance: 100)
+            DragGesture(minimumDistance: 50)
                 .onEnded {
                     updateMenuState(translationWidth: $0.translation.width)
                 }
         )
-        .background(
-            ActivityView(
-                isPresented: .constant(!model.activityItems.isEmpty),
-                items: model.activityItems,
-                onComplete: { _,_,_,_  in model.onActivityComplete() }
-            )
-        )
+        .background(activityView)
         .sheet(
             isPresented: .constant(model.authorPageURL != nil),
             onDismiss: model.onAuthorPageDismiss,
@@ -97,12 +106,7 @@ struct NewsListRowView: View {
     
     private func updateMenuState(translationWidth: CGFloat) {
         withAnimation(.spring()) {
-            if translationWidth < 100 {
-                model.showMenu()
-                
-            } else {
-                model.hideMenu()
-            }
+            translationWidth < 0 ? model.showMenu() : model.hideMenu()
         }
     }
 }

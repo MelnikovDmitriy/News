@@ -8,7 +8,6 @@
 import SwiftUI
 
 final class NewsWebViewModel: ObservableObject {
-
     let newsURL: URL
     let defaultErrorModel = ErrorModelFactory().newsWebViewLoadingError
 

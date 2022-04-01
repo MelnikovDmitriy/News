@@ -8,9 +8,6 @@
 import SwiftUI
 
 final class RefreshAnimationViewModel: ObservableObject {
-
-    private let animationURL = AnimationURL.loading
-
     @Published private(set) var animationStarted = false
     @Published private(set) var staticImageScale = Config.minImageScale
     @Published private(set) var staticImage: CGImage?
@@ -26,7 +23,7 @@ final class RefreshAnimationViewModel: ObservableObject {
     
     private func prepareStaticImage() {
         DispatchQueue.global(qos: .userInitiated).async {
-            if let data = try? Data(contentsOf: self.animationURL),
+            if let data = try? Data(contentsOf: AnimationURL.loading),
                let source =  CGImageSourceCreateWithData(data as CFData, nil),
                CGImageSourceGetCount(source) > 0 {
                 
@@ -46,7 +43,7 @@ final class RefreshAnimationViewModel: ObservableObject {
     func updateImageSize(offset: CGFloat) {
         if offset == 0 {
             staticImageScale = Config.minImageScale
-        
+
         } else {
             staticImageScale = offset / Config.refreshViewTotalHeight
         }
