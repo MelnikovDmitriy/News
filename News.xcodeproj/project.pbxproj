@@ -41,12 +41,11 @@
 		0A4BE2D3278F619000DEABFB /* NewsWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE2D0278F619000DEABFB /* NewsWebView.swift */; };
 		0A4BE2D4278F619000DEABFB /* WKWebViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE2D1278F619000DEABFB /* WKWebViewWrapper.swift */; };
 		0A4BE2D5278F619000DEABFB /* NewsWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE2D2278F619000DEABFB /* NewsWebViewModel.swift */; };
-		A422358627F6FCAE0088BB46 /* MyTargetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A422358527F6FCAE0088BB46 /* MyTargetSDK.xcframework */; };
-		A422358727F6FCAE0088BB46 /* MyTargetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A422358527F6FCAE0088BB46 /* MyTargetSDK.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A422358D27F71D820088BB46 /* NativeAdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A422358C27F71D820088BB46 /* NativeAdViewModel.swift */; };
 		A422358F27F720F80088BB46 /* NativeAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A422358E27F720F80088BB46 /* NativeAdView.swift */; };
 		A422359127F725D30088BB46 /* NativeAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = A422359027F725D30088BB46 /* NativeAd.swift */; };
 		A422359527F739420088BB46 /* RoundedCornerRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A422359427F739420088BB46 /* RoundedCornerRectangle.swift */; };
+		A422359C27FB43530088BB46 /* MyTargetSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A422359B27FB43530088BB46 /* MyTargetSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -56,7 +55,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A422358727F6FCAE0088BB46 /* MyTargetSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,7 +97,6 @@
 		0A4BE2D0278F619000DEABFB /* NewsWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsWebView.swift; sourceTree = "<group>"; };
 		0A4BE2D1278F619000DEABFB /* WKWebViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewWrapper.swift; sourceTree = "<group>"; };
 		0A4BE2D2278F619000DEABFB /* NewsWebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsWebViewModel.swift; sourceTree = "<group>"; };
-		A422358527F6FCAE0088BB46 /* MyTargetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MyTargetSDK.xcframework; path = "mytarget-ios-sdk-5/MyTargetSDK.xcframework"; sourceTree = "<group>"; };
 		A422358C27F71D820088BB46 /* NativeAdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdViewModel.swift; sourceTree = "<group>"; };
 		A422358E27F720F80088BB46 /* NativeAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdView.swift; sourceTree = "<group>"; };
 		A422359027F725D30088BB46 /* NativeAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAd.swift; sourceTree = "<group>"; };
@@ -111,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A422358627F6FCAE0088BB46 /* MyTargetSDK.xcframework in Frameworks */,
+				A422359C27FB43530088BB46 /* MyTargetSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				0A4BE263278EF15E00DEABFB /* News */,
-				A422358227F6FBD10088BB46 /* Frameworks */,
 				0A4BE262278EF15E00DEABFB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -354,14 +350,6 @@
 			path = News;
 			sourceTree = "<group>";
 		};
-		A422358227F6FBD10088BB46 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A422358527F6FCAE0088BB46 /* MyTargetSDK.xcframework */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
 		A422358927F6FF7E0088BB46 /* Ad */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +385,9 @@
 			dependencies = (
 			);
 			name = News;
+			packageProductDependencies = (
+				A422359B27FB43530088BB46 /* MyTargetSDK */,
+			);
 			productName = News;
 			productReference = 0A4BE261278EF15E00DEABFB /* News.app */;
 			productType = "com.apple.product-type.application";
@@ -426,6 +417,7 @@
 			);
 			mainGroup = 0A4BE258278EF15E00DEABFB;
 			packageReferences = (
+				A422359A27FB43530088BB46 /* XCRemoteSwiftPackageReference "mytarget-ios-spm" */,
 			);
 			productRefGroup = 0A4BE262278EF15E00DEABFB /* Products */;
 			projectDirPath = "";
@@ -691,6 +683,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A422359A27FB43530088BB46 /* XCRemoteSwiftPackageReference "mytarget-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/myTargetSDK/mytarget-ios-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A422359B27FB43530088BB46 /* MyTargetSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A422359A27FB43530088BB46 /* XCRemoteSwiftPackageReference "mytarget-ios-spm" */;
+			productName = MyTargetSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0A4BE259278EF15E00DEABFB /* Project object */;
 }
