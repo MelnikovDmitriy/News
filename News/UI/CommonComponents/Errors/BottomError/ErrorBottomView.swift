@@ -22,7 +22,7 @@ struct ErrorBottomView: View {
                         Button(action: model.action) {
                             Text(model.actionTitle)
                                 .foregroundColor(.white)
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(Fonts.button)
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 4)
                                 .background(Color.blue)
@@ -33,7 +33,7 @@ struct ErrorBottomView: View {
                             Button(action: cancel) {
                                 Text("Отмена")
                                     .foregroundColor(.blue)
-                                    .font(.system(size: 14, weight: .semibold))
+                                    .font(Fonts.button)
                                     .padding(.horizontal, 16)
                                     .padding(.vertical, 4)
                                     .background(

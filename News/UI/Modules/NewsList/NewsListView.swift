@@ -11,13 +11,14 @@ struct NewsListView: View {
     @ObservedObject var model: NewsListViewModel
     
     @State private var scrollingDisabled = false
-    @State private var scrollViewFrame = CGRect.zero
     
     private let coordinateSpaceName = "NewsScrollViewCoordinateSpaceName"
 
     private var newsScrollView: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 24) {
+                NativeAdView()
+                
                 ForEach(model.newsListRowViewModels) { viewModel in
                     NewsListRowView(model: viewModel)
                         .onAppear { model.newsWillAppear(model: viewModel) }
@@ -85,7 +86,7 @@ struct NewsListView: View {
         Button(action: action) {
             Text("Загрузить")
                 .foregroundColor(.white)
-                .font(.system(size: 14, weight: .semibold))
+                .font(Fonts.button)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 4)
                 .background(Color.blue)

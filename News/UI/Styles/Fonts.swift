@@ -11,6 +11,7 @@ enum Fonts {
     static let title = Font.system(size: 20, weight: .semibold)
     static let subtitle = Font.system(size: 16, weight: .semibold)
     static let body = Font.system(size: 14)
+    static let button = Font.system(size: 14, weight: .semibold)
 }
 
 struct Fonts_Previews: PreviewProvider {

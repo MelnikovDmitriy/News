@@ -41,7 +41,27 @@
 		0A4BE2D3278F619000DEABFB /* NewsWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE2D0278F619000DEABFB /* NewsWebView.swift */; };
 		0A4BE2D4278F619000DEABFB /* WKWebViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE2D1278F619000DEABFB /* WKWebViewWrapper.swift */; };
 		0A4BE2D5278F619000DEABFB /* NewsWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BE2D2278F619000DEABFB /* NewsWebViewModel.swift */; };
+		A422358627F6FCAE0088BB46 /* MyTargetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A422358527F6FCAE0088BB46 /* MyTargetSDK.xcframework */; };
+		A422358727F6FCAE0088BB46 /* MyTargetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A422358527F6FCAE0088BB46 /* MyTargetSDK.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A422358D27F71D820088BB46 /* NativeAdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A422358C27F71D820088BB46 /* NativeAdViewModel.swift */; };
+		A422358F27F720F80088BB46 /* NativeAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A422358E27F720F80088BB46 /* NativeAdView.swift */; };
+		A422359127F725D30088BB46 /* NativeAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = A422359027F725D30088BB46 /* NativeAd.swift */; };
+		A422359527F739420088BB46 /* RoundedCornerRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A422359427F739420088BB46 /* RoundedCornerRectangle.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A422358827F6FCAE0088BB46 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A422358727F6FCAE0088BB46 /* MyTargetSDK.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0A4BE261278EF15E00DEABFB /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +99,11 @@
 		0A4BE2D0278F619000DEABFB /* NewsWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsWebView.swift; sourceTree = "<group>"; };
 		0A4BE2D1278F619000DEABFB /* WKWebViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewWrapper.swift; sourceTree = "<group>"; };
 		0A4BE2D2278F619000DEABFB /* NewsWebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsWebViewModel.swift; sourceTree = "<group>"; };
+		A422358527F6FCAE0088BB46 /* MyTargetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MyTargetSDK.xcframework; path = "mytarget-ios-sdk-5/MyTargetSDK.xcframework"; sourceTree = "<group>"; };
+		A422358C27F71D820088BB46 /* NativeAdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdViewModel.swift; sourceTree = "<group>"; };
+		A422358E27F720F80088BB46 /* NativeAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdView.swift; sourceTree = "<group>"; };
+		A422359027F725D30088BB46 /* NativeAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAd.swift; sourceTree = "<group>"; };
+		A422359427F739420088BB46 /* RoundedCornerRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerRectangle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A422358627F6FCAE0088BB46 /* MyTargetSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				0A4BE263278EF15E00DEABFB /* News */,
+				A422358227F6FBD10088BB46 /* Frameworks */,
 				0A4BE262278EF15E00DEABFB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				0A4BE264278EF15E00DEABFB /* NewsApp.swift */,
+				A422358927F6FF7E0088BB46 /* Ad */,
 				0A4BE287278F145C00DEABFB /* BusinessLogic */,
 				0A4BE272278EF25100DEABFB /* UI */,
 			);
@@ -231,6 +259,7 @@
 		0A4BE2A6278F1EC500DEABFB /* CommonComponents */ = {
 			isa = PBXGroup;
 			children = (
+				A422359327F738700088BB46 /* Shapes */,
 				0A4BE2CA278F606400DEABFB /* Activity */,
 				0A4BE2B8278F4E3200DEABFB /* AnimatedImage */,
 				0A4BE2A7278F1ED700DEABFB /* Errors */,
@@ -325,6 +354,32 @@
 			path = News;
 			sourceTree = "<group>";
 		};
+		A422358227F6FBD10088BB46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A422358527F6FCAE0088BB46 /* MyTargetSDK.xcframework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		A422358927F6FF7E0088BB46 /* Ad */ = {
+			isa = PBXGroup;
+			children = (
+				A422359027F725D30088BB46 /* NativeAd.swift */,
+				A422358E27F720F80088BB46 /* NativeAdView.swift */,
+				A422358C27F71D820088BB46 /* NativeAdViewModel.swift */,
+			);
+			path = Ad;
+			sourceTree = "<group>";
+		};
+		A422359327F738700088BB46 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				A422359427F739420088BB46 /* RoundedCornerRectangle.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -335,6 +390,7 @@
 				0A4BE25D278EF15E00DEABFB /* Sources */,
 				0A4BE25E278EF15E00DEABFB /* Frameworks */,
 				0A4BE25F278EF15E00DEABFB /* Resources */,
+				A422358827F6FCAE0088BB46 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -369,6 +425,8 @@
 				Base,
 			);
 			mainGroup = 0A4BE258278EF15E00DEABFB;
+			packageReferences = (
+			);
 			productRefGroup = 0A4BE262278EF15E00DEABFB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -401,6 +459,7 @@
 				0A4BE2B6278F4DBB00DEABFB /* ScrollViewContentOffsetObserverViewModifier.swift in Sources */,
 				0A4BE292278F153100DEABFB /* GamesMailRuNewsDTO.swift in Sources */,
 				0A4BE2A0278F17F300DEABFB /* NewsListRowViewModelFactory.swift in Sources */,
+				A422359527F739420088BB46 /* RoundedCornerRectangle.swift in Sources */,
 				0A4BE2D3278F619000DEABFB /* NewsWebView.swift in Sources */,
 				0A4BE2AD278F1ED700DEABFB /* MessageView.swift in Sources */,
 				0A4BE27E278EF32C00DEABFB /* Fonts.swift in Sources */,
@@ -410,6 +469,8 @@
 				0A4BE2D4278F619000DEABFB /* WKWebViewWrapper.swift in Sources */,
 				0A4BE2BA278F4E3200DEABFB /* AnimatedImageView.swift in Sources */,
 				0A4BE275278EF27400DEABFB /* NewsListRowView.swift in Sources */,
+				A422358F27F720F80088BB46 /* NativeAdView.swift in Sources */,
+				A422358D27F71D820088BB46 /* NativeAdViewModel.swift in Sources */,
 				0A4BE2A4278F1DDA00DEABFB /* ErrorModelFactory.swift in Sources */,
 				0A4BE29D278F16B500DEABFB /* NewsListView.swift in Sources */,
 				0A4BE2BF278F5D7C00DEABFB /* LoadingMoreNewsAnimationModel.swift in Sources */,
@@ -420,6 +481,7 @@
 				0A4BE295278F153100DEABFB /* NewsProviderError.swift in Sources */,
 				0A4BE279278EF2CD00DEABFB /* NewsListRowMenuView.swift in Sources */,
 				0A4BE2CE278F606400DEABFB /* ActivityView.swift in Sources */,
+				A422359127F725D30088BB46 /* NativeAd.swift in Sources */,
 				0A4BE277278EF27F00DEABFB /* NewsListRowViewModel.swift in Sources */,
 				0A4BE2C4278F5D8500DEABFB /* RefreshAnimationView.swift in Sources */,
 				0A4BE2BE278F5D7C00DEABFB /* LoadingMoreNewsAnimation.swift in Sources */,
